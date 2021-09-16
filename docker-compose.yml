@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  redis-container:
+    image: redis:alpine
+    command: "redis-server --port 9999"
+    container_name: redis
+    hostname: redis
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    ports:
+      - 9999:9999
+

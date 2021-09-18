@@ -1,1 +1,4 @@
 rootProject.name = 'springboot-redis-batch'
+include 'spring-redis-batch-front'
+include 'spring-redis-batch-redis'
+

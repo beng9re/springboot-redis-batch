@@ -1,0 +1,9 @@
+spring:
+  redis:
+    port: 9999
+    host: 127.0.0.1
+    lettuce:
+      pool:
+        max-active: 10
+        min-idle: 2
+

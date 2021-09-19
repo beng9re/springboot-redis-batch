@@ -1,0 +1,14 @@
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation project(':spring-redis-batch-redis')
+    testImplementation project(':spring-redis-batch-redis')
+}
+
+bootJar{
+    enabled(false)
+}
+
+jar{
+    enabled(true)
+}

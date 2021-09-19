@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'org.asciidoctor.convert' version '1.5.8'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
 }
 
@@ -12,6 +13,20 @@ ext {
     set('snippetsDir', file("build/generated-snippets"))
 }
 
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':spring-redis-batch-web')
+    implementation project(':spring-redis-batch-redis')
+    implementation project(':spring-redis-batch-chat')
+
+}
+
+
 //하위 프로젝트 전부 공통 정의
 subprojects {
     apply plugin: 'java'
@@ -22,6 +37,7 @@ subprojects {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation "org.projectlombok:lombok"
     }
 
     configurations {

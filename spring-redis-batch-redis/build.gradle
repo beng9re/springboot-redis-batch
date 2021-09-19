@@ -1,15 +1,13 @@
-plugins {
-    id 'java'
-}
-
-group 'com.kbh0581.springboot-redis-batch'
-version '0.0.1-SNAPSHOT'
-
-
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 }
 
-test {
-    useJUnitPlatform()
+bootJar{
+    enabled(false)
+}
+
+jar{
+    enabled(true)
 }

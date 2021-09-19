@@ -1,0 +1,15 @@
+spring:
+  config:
+    import:
+      additional-location: 'classpath:application-*.yml'
+
+  profiles:
+    include:
+      - redis
+server:
+  port: 8081
+
+
+logging:
+  level:
+    root: debug

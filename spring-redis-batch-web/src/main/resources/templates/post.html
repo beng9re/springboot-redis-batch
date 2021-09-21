@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div>
+    <input style="width: 10rem; height: 2rem" id="text" type="text">
+
+    </input>
+
+
+</div>
+
+<script>
+   const ENTER_KEY = 'Enter';
+   const text = document.getElementById("text")
+   const chatSubmit = (e) => {
+        axios.get('chat/publish').then(({data})=>{
+            console.log(data);
+        })
+
+   }
+
+
+   text.addEventListener("keydown",(e)=>{
+       if(e.key === ENTER_KEY){
+           chatSubmit(e);
+       }
+   })
+</script>
+
+
+
+
+</body>
+</html>

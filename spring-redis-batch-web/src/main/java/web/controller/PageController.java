@@ -17,4 +17,12 @@ public class PageController {
         return "main";
     }
 
+
+    @RequestMapping("/post")
+    public String post(){
+        return "post";
+    }
+
+
+
 }

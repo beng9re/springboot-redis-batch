@@ -6,6 +6,9 @@ spring:
   profiles:
     include:
       - redis
+  devtools:
+    livereload:
+      enabled: true
 server:
   port: 8081
 
@@ -13,3 +16,4 @@ server:
 logging:
   level:
     root: debug
+

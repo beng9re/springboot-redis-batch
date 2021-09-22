@@ -5,19 +5,35 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
 <body>
-    <div id="chatComponent">
-        <div>
-            a
-        </div>
-        <div>
-            a
-        </div>
+    <div id="chatComponent" style="height: 80%; height: 80%;background-color: #80808024;" >
+        <div>a</div>
+        <div>a</div>
     </div>
-
+    <div>
+        <input id="chat" style="width: 80%;height: 2rem"/>
+        <button id="submit" style="width: 20%">전송</button>
+    </div>
     <script>
+        const ENTER_KEY = 'Enter';
+        const chat = document.getElementById("chat")
+        const submit = document.getElementById("submit")
+        const chatSubmit = (e) => {
+
+            axios.post('chat/post',{"data":"message"}).then(({data})=>{
+                console.log(data);
+            })
+        }
+
+        chat.addEventListener("keydown",(e)=>{
+            if(e.key === ENTER_KEY){
+                chatSubmit(e);
+            }
+        })
+
 
     </script>
 </body>

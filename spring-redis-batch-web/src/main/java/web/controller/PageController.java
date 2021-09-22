@@ -18,10 +18,7 @@ public class PageController {
     }
 
 
-    @RequestMapping("/post")
-    public String post(){
-        return "post";
-    }
+
 
 
 

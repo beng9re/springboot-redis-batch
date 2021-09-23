@@ -22,10 +22,14 @@
         const chat = document.getElementById("chat")
         const submit = document.getElementById("submit")
         const chatSubmit = (e) => {
-
-            axios.post('chat/post',{"data":"message"}).then(({data})=>{
+            console.log(chat.textContent);
+            const message = chat.value;
+            const postData = {
+                message
+            }
+            axios.post('chat/post',postData).then(({data})=>{
                 console.log(data);
-            })
+            });
         }
 
         chat.addEventListener("keydown",(e)=>{

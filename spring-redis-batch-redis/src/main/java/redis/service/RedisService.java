@@ -1,5 +1,5 @@
 package redis.service;
 
 public interface RedisService {
-    public void test();
+    public void sendMessage(String message);
 }

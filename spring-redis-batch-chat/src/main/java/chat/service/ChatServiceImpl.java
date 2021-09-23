@@ -1,5 +1,6 @@
 package chat.service;
 
+import chat.domain.ChatPostDto;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class ChatServiceImpl implements ChatService{
 
     final private RedisService redisService;
 
-    public void chat(){
-        redisService.test();
+    public void chat(ChatPostDto dto){
+        redisService.sendMessage(dto.getMessage());
     }
 
 }

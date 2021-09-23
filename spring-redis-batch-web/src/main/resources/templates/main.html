@@ -10,8 +10,7 @@
 </head>
 <body>
     <div id="chatComponent" style="height: 80%; height: 80%;background-color: #80808024;" >
-        <div>a</div>
-        <div>a</div>
+
     </div>
     <div>
         <input id="chat" style="width: 80%;height: 2rem"/>
@@ -23,12 +22,15 @@
         const submit = document.getElementById("submit")
         const chatSubmit = (e) => {
             console.log(chat.textContent);
-            const message = chat.value;
+            const message = chat.value || "";
+            if(message === ""){
+                return;
+            }
             const postData = {
                 message
             }
             axios.post('chat/post',postData).then(({data})=>{
-                console.log(data);
+                document.getElementById("chat").value = "";
             });
         }
 
@@ -36,7 +38,11 @@
             if(e.key === ENTER_KEY){
                 chatSubmit(e);
             }
+        });
+        submit.addEventListener("click",(e)=>{
+            chatSubmit(e);
         })
+
 
 
     </script>

@@ -13,9 +13,6 @@ public class RedisServiceImpl implements RedisService{
 
    public void sendMessage(String message){
       ListOperations listOperations = redisTemplate.opsForList();
-
       listOperations.rightPush("message",message);
-
-
    }
 }

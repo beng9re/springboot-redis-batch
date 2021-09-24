@@ -9,32 +9,90 @@
 
 </head>
 <body>
-    <div id="chatComponent" style="height: 80%; height: 80%;background-color: #80808024;" >
+    <div id="chatComponent" style="height: 80%; height: 80%;background-color: #80808024; overflow: auto" >
 
     </div>
-    <div>
-        <input id="chat" style="width: 80%;height: 2rem"/>
-        <button id="submit" style="width: 20%">전송</button>
+    <div id="userWap">
+        <input id="user" style="width: 40%; height: 2rem"/>
+        <button id="userButton" style="height: 2rem">닉네임입력</button>
     </div>
+    <div id="chatWap" style="display: none;">
+        <div id="userContext">
+
+        </div>
+        <input id="chat" style="width: 80%; height: 2rem"/>
+        <button id="submit" style="width: 18%; height: 2rem ">전송</button>
+    </div>
+
     <script>
         const ENTER_KEY = 'Enter';
         const chat = document.getElementById("chat")
         const submit = document.getElementById("submit")
+        const context = document.getElementById("chatComponent")
+        const userButton = document.getElementById("userButton");
+        const user = document.getElementById("user");
+        const userContext =document.getElementById("userContext");
+
+
+
+        const registUser = (e) => {
+            if(!user.value){
+                alert("텍스트를 입력하세요")
+            }
+            sessionStorage.setItem("user",user.value);
+            userContext.textContent = sessionStorage.getItem("user") + " 님"
+            document.getElementById("userWap").style.display= "none";
+            document.getElementById("chatWap").style.display= "block";
+        }
+
+        userButton.addEventListener("click", e=>{
+            registUser(e);
+        })
+        user.addEventListener("keyup",e =>{
+            if(e.key === ENTER_KEY){
+                registUser(e);
+            }
+        })
+
+
+
+        const chatSubscribe = () => {
+            const event = new EventSource("chat/sub");
+            event.onmessage = e => {
+                console.log(e.data);
+                const {message,user} = JSON.parse(e.data);
+                if (message){
+                    const wap =  document.createElement("div");
+
+                    wap.style.display =  "flex";
+                    wap.style.justifyContent = sessionStorage.getItem("user") === user ? "end" : "";
+                    wap.innerHTML = `
+                        <span style="font-weight: bold">${user} : </span>
+                        <sapn>${message}</sapn>
+                    `
+                    context.appendChild(wap);
+                }
+
+            }
+        }
+
+        chatSubscribe();
+
         const chatSubmit = (e) => {
-            console.log(chat.textContent);
             const message = chat.value || "";
             if(message === ""){
                 return;
             }
             const postData = {
-                message
+                message,
+                user:sessionStorage.getItem("user")
             }
             axios.post('chat/post',postData).then(({data})=>{
-                document.getElementById("chat").value = "";
+                chat.value = "";
             });
         }
 
-        chat.addEventListener("keydown",(e)=>{
+        chat.addEventListener("keyup",(e)=>{
             if(e.key === ENTER_KEY){
                 chatSubmit(e);
             }

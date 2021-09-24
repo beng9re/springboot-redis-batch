@@ -3,16 +3,12 @@ package chat.controller;
 import chat.domain.ChatPostDto;
 import chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import redis.ChatMessageSubscriber;
 
-import java.io.IOException;
 import java.util.HashMap;
-
-import static java.lang.Thread.sleep;
 
 @RestController
 @RequestMapping("/chat")

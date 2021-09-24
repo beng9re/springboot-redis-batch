@@ -1,11 +1,7 @@
 package redis;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
-
-import java.util.Map;
 
 public class ChatRedisMessagePublisher implements MessagePublisher{
 

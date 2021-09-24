@@ -1,8 +1,5 @@
 package redis;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
@@ -12,13 +9,12 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 @Slf4j
 public class ChatMessageSubscriber implements MessageListener {
 
-
+    //각 클라이언트에 맵핑된 SseEmitter
     Map<String,SseEmitter> sseHash = new HashMap();
 
     public Map<String,SseEmitter> getChatEmitter() {
@@ -31,6 +27,7 @@ public class ChatMessageSubscriber implements MessageListener {
 
         sseHash.forEach((key,sse) -> {
             try {
+                //message 객체를 json 형식으로 반환
                 sse.send(new String(message.getBody()),MediaType.APPLICATION_JSON);
             }catch (IOException ie){
                 log.error(ie.getMessage());

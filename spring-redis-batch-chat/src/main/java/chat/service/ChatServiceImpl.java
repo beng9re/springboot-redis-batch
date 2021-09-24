@@ -3,16 +3,11 @@ package chat.service;
 import chat.domain.ChatPostDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
-
 import org.springframework.stereotype.Service;
 import redis.ChatRedisMessagePublisher;
-import redis.service.RedisService;
-import lombok.RequiredArgsConstructor;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Service

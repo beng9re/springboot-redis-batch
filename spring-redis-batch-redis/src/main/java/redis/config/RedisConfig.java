@@ -6,17 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-import org.springframework.data.redis.serializer.GenericToStringSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.ChatMessageSubscriber;
 import redis.ChatRedisMessagePublisher;
-import redis.MessagePublisher;
 
 @Configuration
 @EnableRedisRepositories
@@ -75,13 +71,12 @@ public class RedisConfig {
     }
 
 
-
+    //레디스 템플릿 빈설정
     @Bean
     public RedisTemplate<?, ?> redisTemplate() {
         RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
         //시리얼라이저 (인코딩 처리)
         redisTemplate.setDefaultSerializer(new StringRedisSerializer());
-
         redisTemplate.setConnectionFactory(redisConnectionFactory());
 
         return redisTemplate;

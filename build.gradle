@@ -25,6 +25,7 @@ dependencies {
     implementation project(':spring-redis-batch-chat')
 
 }
+apply plugin: 'idea'
 
 
 //하위 프로젝트 전부 공통 정의
@@ -32,10 +33,13 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'idea'
+
 
     dependencies {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+        runtimeOnly 'org.springframework.boot:spring-boot-devtools'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation "org.projectlombok:lombok"
     }

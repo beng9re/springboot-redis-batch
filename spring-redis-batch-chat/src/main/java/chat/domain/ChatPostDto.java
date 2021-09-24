@@ -8,5 +8,6 @@ import lombok.Setter;
 public class ChatPostDto {
 
     private String message;
+    private String user;
 
 }

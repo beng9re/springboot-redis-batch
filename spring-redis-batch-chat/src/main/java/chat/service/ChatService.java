@@ -4,5 +4,5 @@ import chat.domain.ChatPostDto;
 
 public interface ChatService {
 
-    public void chat(ChatPostDto dto);
+    void chat(ChatPostDto dto);
 }

@@ -33,7 +33,22 @@
         const user = document.getElementById("user");
         const userContext =document.getElementById("userContext");
 
+        const getChatList = () => {
+            axios.get('chat/list').then(({data})=>{
+                data.forEach((item)=>{
+                    const {user,message} = item;
+                    const wap =  document.createElement("div");
+                    wap.style.display =  "flex";
+                    wap.style.justifyContent = sessionStorage.getItem("user") === user ? "end" : "";
+                    wap.innerHTML = `
+                        <span style="font-weight: bold">${user} : </span>
+                        <sapn>${message}</sapn>
+                    `
+                    context.appendChild(wap);
+                })
+            })
 
+        }
 
         const registUser = (e) => {
             if(!user.value){
@@ -43,6 +58,7 @@
             userContext.textContent = sessionStorage.getItem("user") + " 님"
             document.getElementById("userWap").style.display= "none";
             document.getElementById("chatWap").style.display= "block";
+            getChatList();
         }
 
         userButton.addEventListener("click", e=>{
@@ -63,7 +79,6 @@
                 const {message,user} = JSON.parse(e.data);
                 if (message){
                     const wap =  document.createElement("div");
-
                     wap.style.display =  "flex";
                     wap.style.justifyContent = sessionStorage.getItem("user") === user ? "end" : "";
                     wap.innerHTML = `

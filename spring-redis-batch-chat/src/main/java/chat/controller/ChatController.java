@@ -1,5 +1,6 @@
 package chat.controller;
 
+import chat.domain.Chat;
 import chat.domain.ChatPostDto;
 import chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import redis.ChatMessageSubscriber;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/chat")
@@ -45,4 +47,11 @@ public class ChatController {
         chatService.chat(chatPostDto);
         return "post";
     }
+
+    @GetMapping("/list")
+    public List<Chat> getChat() {
+        return chatService.totalChat();
+    }
+
+
 }

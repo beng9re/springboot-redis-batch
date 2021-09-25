@@ -49,11 +49,13 @@ public class RedisConfig {
         return new ChannelTopic("chatQue");
     }
 
+    //구독 서비스 생성
     @Bean
     ChatMessageSubscriber chatMessageSubscriber(){
         return chatMessageSubscriber;
     }
 
+    //메시지 리스터 생성
     @Bean
     public MessageListenerAdapter chatMessageListener(){
         return new MessageListenerAdapter(chatMessageSubscriber);
@@ -64,7 +66,7 @@ public class RedisConfig {
     RedisMessageListenerContainer redisContainer(){
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory());
-        //체팅 메시지 등록
+        //체팅 이벤트 등록
         container.addMessageListener(chatMessageListener(),chatTopic());
 
         return container;

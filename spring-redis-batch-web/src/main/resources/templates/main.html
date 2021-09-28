@@ -46,6 +46,7 @@
                     `
                     context.appendChild(wap);
                 })
+                scrollBottom(context);
             })
 
         }
@@ -53,6 +54,7 @@
         const registUser = (e) => {
             if(!user.value){
                 alert("텍스트를 입력하세요")
+                return;
             }
             sessionStorage.setItem("user",user.value);
             userContext.textContent = sessionStorage.getItem("user") + " 님"
@@ -63,13 +65,13 @@
 
         userButton.addEventListener("click", e=>{
             registUser(e);
+
         })
         user.addEventListener("keyup",e =>{
             if(e.key === ENTER_KEY){
                 registUser(e);
             }
         })
-
 
 
         const chatSubscribe = () => {
@@ -86,7 +88,9 @@
                         <sapn>${message}</sapn>
                     `
                     context.appendChild(wap);
+                    scrollBottom(context)
                 }
+
 
             }
         }
@@ -104,8 +108,14 @@
             }
             axios.post('chat/post',postData).then(({data})=>{
                 chat.value = "";
+                scrollBottom(context);
             });
         }
+
+        const scrollBottom = (object) => {
+            object.scrollTop = object.scrollHeight;
+        }
+
 
         chat.addEventListener("keyup",(e)=>{
             if(e.key === ENTER_KEY){
